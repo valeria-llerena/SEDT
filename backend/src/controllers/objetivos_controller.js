@@ -7,7 +7,7 @@ import config from "../config.js";
 const getObjetivos = async(req, res) =>{
     try {
         const connection = await getConnection(); 
-        const result = await connection.promise().query("SELECT SQL_NO_CACHE  * FROM objetivos"); 
+        const result = await connection.promise().query("SELECT  * FROM objetivo"); 
         console.log(result);
         res.json(result); 
     } catch (error) {
@@ -21,9 +21,10 @@ const getObjetivo = async(req, res) =>{
     try {
         console.log(req.params);
         const {id} = req.params;  
+        const idobjetivos = id;
         const connection = await getConnection(); 
-        const result = await connection.query("SELECT * FROM objetivos"); 
-        res.json({message: "TUPU"}); 
+        const result = await connection.promise().query("SELECT * FROM objetivo WHERE idobjetivos =?", idobjetivos); 
+        res.json({message: result}); 
     } catch (error) {
         res.status(500); 
         res.send(error.message); 
@@ -33,8 +34,8 @@ const getObjetivo = async(req, res) =>{
 
 const addobjetivos = async (req, res) =>{
     try {
-        const [{idobjetivos, nombre, puntaje, descripcion, inicio, fin, id_trabajador}] = req.body;
-        const objetivo = {idobjetivos, nombre, puntaje, descripcion, inicio, fin, id_trabajador}; 
+        const {idobjetivo, nombre, descripcion, porcentaje, persona, idmetrica, fechainicio, fecahfin, meta, aceptable} = req.body;
+        const objetivo = {idobjetivo, nombre, descripcion, porcentaje, persona, idmetrica, fechainicio, fecahfin, meta, aceptable }; 
         const connection = await getConnection();
         await connection.promise().query("INSERT INTO objetivos SET ?", objetivo);
         res.json({message: "Objetivo Added"}); 
