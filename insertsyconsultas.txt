@@ -1,0 +1,59 @@
+/*PERSONAS*/
+INSERT INTO `sedt2`.`persona` (`dni`, `nombre`, `apellido`, `correo`, `puesto`, `supervisor`) VALUES ('12345678', 'Pepe', 'Gutierrez', 'pepito@gmail.com', 'ASISTENTE', '1');
+INSERT INTO `sedt2`.`persona` (`dni`, `nombre`, `apellido`, `correo`, `puesto`, `supervisor`) VALUES ('12354678', 'Mario', 'Gutierrez', 'pepito@gmail.com', 'ASISTENTE', '1');
+INSERT INTO `sedt2`.`persona` (`dni`, `nombre`, `apellido`, `correo`, `puesto`, `supervisor`) VALUES ('32165489', 'Maria', 'Tere', 'mariat@gmail.com', 'JEFE', '1');
+INSERT INTO `sedt2`.`persona` (`dni`, `nombre`, `apellido`, `correo`, `puesto`, `supervisor`) VALUES ('32165479', 'Josefa', 'Gutierrez', 'josefaq@gmail.com', 'ASISTENTE', '1');
+INSERT INTO `sedt2`.`persona` (`dni`, `nombre`, `apellido`, `correo`, `puesto`, `supervisor`) VALUES ('12546389', 'Carlos', 'Maria', 'carlosmaria@gmail.com', 'ASISTENTE', '1');
+INSERT INTO `sedt2`.`persona` (`dni`, `nombre`, `apellido`, `correo`, `puesto`, `supervisor`) VALUES ('54213569', 'Mario', 'Gutierrez', 'mariog@gmail.com', 'ASISTENTE', '1');
+INSERT INTO `sedt2`.`persona` (`dni`, `nombre`, `apellido`, `correo`, `puesto`, `supervisor`) VALUES ('78546523', 'Pepito', 'Alvarez', 'pepalv@gmail.com', 'ASISTENTE', '1');
+INSERT INTO `sedt2`.`persona` (`dni`, `nombre`, `apellido`, `correo`, `puesto`, `supervisor`) VALUES ('15423594', 'Mario', 'Gutierrez', 'guimario@gmail.com', 'ASISTENTE', '1');
+INSERT INTO `sedt2`.`persona` (`dni`, `nombre`, `apellido`, `correo`, `puesto`, `supervisor`) VALUES ('12565463', 'Rodolfo', 'Martinez', 'starw@gmail.com', 'JEFE', '1');
+INSERT INTO `sedt2`.`persona` (`dni`, `nombre`, `apellido`, `correo`, `puesto`, `supervisor`) VALUES ('45986652', 'Jose', 'Carpio', 'josec@gmail.com', 'ASISTENTE', '1');
+
+/*METRICA*/
+INSERT INTO `sedt2`.`metrica` (`idmetrica`, `tipo`, `nombre`) VALUES ('1', '1', 'Cantidad de Ventas');
+INSERT INTO `sedt2`.`metrica` (`tipo`, `nombre`) VALUES ( '0', 'Nro de Clientes Satisfechos');
+INSERT INTO `sedt2`.`metrica` (`tipo`, `nombre`) VALUES ('1', 'Apoyo a compañeros');
+INSERT INTO `sedt2`.`metrica` (`tipo`, `nombre`) VALUES ( '1', 'Capacitaciones Recibidas');
+
+/*OBJETIVO*/
+INSERT INTO `sedt2`.`objetivo` (`idobjetivo`, `nombre`, `descripcion`, `porcentaje`, `persona`, `id_metrica`, `fechainicio`, `fechafin`, `meta`, `aceptable`) VALUES ('1', 'Clientes Contentos', 'Nro de clientes contentos con el servicio de recepcion', '0', '72152069', '5', '2023-10-04', '2024-10-04', '100', '70');
+INSERT INTO `sedt2`.`objetivo` ( `nombre`, `descripcion`, `porcentaje`, `persona`, `id_metrica`, `fechainicio`, `fechafin`, `meta`, `aceptable`) VALUES ( 'Clientes Contentos', 'Nro de clientes contentos con el servicio de recepcion', '0', '32165479', '5', '2023-10-07', '2024-05-10', '70', '20');
+INSERT INTO `sedt2`.`objetivo` ( `nombre`, `descripcion`, `porcentaje`, `persona`, `id_metrica`, `fechainicio`, `fechafin`, `meta`, `aceptable`) VALUES ('Capacitaciones A Empleados', 'Capacitar a empleados nuevos', '0', '72152069', '6', '2023-10-04', '2024-10-04', 'Empleados nuevos demuestran mucho progreso', 'Empleados nuevos no demuestran progreso');
+INSERT INTO `sedt2`.`objetivo` (`nombre`, `descripcion`, `porcentaje`, `persona`, `id_metrica`, `fechainicio`, `fechafin`, `meta`, `aceptable`) VALUES ('Capacitarse en Temas de Admin', 'Realizar capacitaciones pagadas que brinda la empresa', '0', '72152069', '7', '2023-10-04', '2024-10-07', '10', '7');
+
+/*PROGRESO*/
+INSERT INTO `sedt2`.`progreso` (`idprogreso`, `fecha`, `porcentaje`, `idobjetivo`, `descripcion`) VALUES ('1', '2023-10-04', '10', '2', '2 Clientes ranked 5 estrellas');
+use sedt2; 
+call sumar(10, 2);
+INSERT INTO `sedt2`.`progreso` (`fecha`, `porcentaje`, `idobjetivo`, `descripcion`) VALUES ('2023-10-04', '20', '4', 'Avance 2 capacitaciones');
+USE sedt2; 
+call sumar(20, 4);
+
+
+CONSULTAS
+
+select count(idobjetivo) as TOTAL_OBJETIVOS, sum(porcentaje), persona from objetivo group by persona; 
+select * from metrica; 
+select * from objetivo; 
+
+
+
+
+
+/* OBJETIVOS */
+select * from objetivo as o 
+inner join metrica as m 
+on o.id_metrica = m.idmetrica; 
+
+/*PRGOGRESOS  */
+select * from progreso AS p
+INNER join 
+objetivo as o 
+on p.idobjetivo= o.idobjetivo
+inner join 
+metrica as m 
+on o.id_metrica = m.idmetrica; 
+
+
+select count(dni)  as CANTIDAD, supervisor  from persona group by supervisor; 
