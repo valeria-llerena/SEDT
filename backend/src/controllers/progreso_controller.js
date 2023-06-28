@@ -4,7 +4,7 @@ import mysql from "mysql2/promise.js";
 import config from "../config.js";
 
 
-const getprogresos = async(req, res) =>{
+const getProgresos = async(req, res) =>{
     try {
         const connection = await getConnection(); 
         const result = await connection.promise().query("SELECT   * FROM progreso"); 
@@ -17,13 +17,43 @@ const getprogresos = async(req, res) =>{
     
 };
 
-const getprogreso= async(req, res) =>{
+const getProgresoPersona = async(req, res) =>{
     try {
         console.log(req.params);
         const {id} = req.params;  
-        const idprogreso = id;
+        const idPersona = id;
         const connection = await getConnection(); 
-        const result = await connection.promise().query("SELECT * FROM progreso WHERE idprogreso =?", idprogreso); 
+        const result = await connection.promise().query("SELECT * FROM progreso WHERE idPersona =?", idPersona); 
+        res.json({message: result}); 
+    } catch (error) {
+        res.status(500); 
+        res.send(error.message); 
+    }
+    
+}
+
+const getProgresoObjetivo = async(req, res) =>{
+    try {
+        console.log(req.params);
+        const {id} = req.params;  
+        const idObjetivo = id;
+        const connection = await getConnection(); 
+        const result = await connection.promise().query("SELECT * FROM progreso WHERE idObjetivo =?", idObjetivo); 
+        res.json({message: result}); 
+    } catch (error) {
+        res.status(500); 
+        res.send(error.message); 
+    }
+    
+};
+
+const getProgreso= async(req, res) =>{
+    try {
+        console.log(req.params);
+        const {id} = req.params;  
+        const idProgreso = id;
+        const connection = await getConnection(); 
+        const result = await connection.promise().query("SELECT * FROM progreso WHERE idProgreso =?", idProgreso); 
         res.json({message: result}); 
     } catch (error) {
         res.status(500); 
@@ -33,15 +63,14 @@ const getprogreso= async(req, res) =>{
     
 };
 
-const addprogreso = async (req, res) =>{
+const addProgreso = async (req, res) =>{
     try {
-        const {idprogreso, fecha, porcentaje,idobjetivo, descripcion} = req.body;
-        const progreso = {idprogreso, fecha, porcentaje,idobjetivo, descripcion}; 
-
+        const {
+            idProgreso, fecha, porcentaje, idObjetivo, descripcion, idPersona
+          } = req.body;
         const connection = await getConnection();
-        await connection.promise().query("INSERT INTO progreso SET ?", progreso);
-        await connection.promise().query("call sumar(" + porcentaje+ "," + idobjetivo+")"); 
-        res.json({message: "Progreso Added"}); 
+        await connection.promise().query("INSERT INTO progreso SET ?", req.body);
+        res.json({message: "Progreso Agregado"}); 
 
       
     } catch (error) {
@@ -51,7 +80,9 @@ const addprogreso = async (req, res) =>{
 };
 
 export const methods = {
-    getprogresos,
-    addprogreso,
-    getprogreso
+    getProgresos,
+    addProgreso,
+    getProgreso, 
+    getProgresoObjetivo, 
+    getProgresoPersona
 }; 

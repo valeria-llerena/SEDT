@@ -21,7 +21,7 @@ const getObjetivo = async (req, res) => {
     const connection = await getConnection();
     const result = await connection
       .promise()
-      .query("SELECT * FROM objetivo WHERE idobjetivos =?", idobjetivos);
+      .query("SELECT * FROM objetivo WHERE idObjetivo =?", idObjetivo);
     res.json({ message: result });
   } catch (error) {
     res.status(500);
@@ -29,34 +29,15 @@ const getObjetivo = async (req, res) => {
   }
 };
 
-const addobjetivos = async (req, res) => {
+const addObjetivos = async (req, res) => {
   try {
     const {
-      nombre,
-      descripcion,
-      porcentaje,
-      persona,
-      id_metrica,
-      fechainicio,
-      fechafin,
-      meta,
-      aceptable,
+      idObjetivo, nombre, descripcion, porcentaje, idPersona, fechaInicio, fechaFin, meta, aceptable, tipoMetrica, nombreMetrica
     } = req.body;
-    const objetivo = {
-      nombre,
-      descripcion,
-      porcentaje,
-      persona,
-      id_metrica,
-      fechainicio,
-      fechafin,
-      meta,
-      aceptable,
-    };
     const connection = await getConnection();
     console.log("objetivo", objetivo);
-    await connection.promise().query("INSERT INTO objetivos SET ?", objetivo);
-    res.json({ message: "Objetivo Added" });
+    await connection.promise().query("INSERT INTO objetivo SET ?", req.body);
+    res.json({ message: "Objetivo Agregado" });
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -65,6 +46,6 @@ const addobjetivos = async (req, res) => {
 
 export const methods = {
   getObjetivos,
-  addobjetivos,
+  addObjetivos,
   getObjetivo,
 };

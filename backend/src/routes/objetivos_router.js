@@ -3,6 +3,6 @@ import {methods as objetivos_controller} from "./../controllers/objetivos_contro
 
 const router = Router(); 
 router.get("/", objetivos_controller.getObjetivos);
-router.post("/", objetivos_controller.addobjetivos);
-router.get("/:id", objetivos_controller.getObjetivos);
+router.post("/", objetivos_controller.addObjetivos);
+router.get("/:id", objetivos_controller.getObjetivo);
 export default router; 

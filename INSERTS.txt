@@ -1,0 +1,9 @@
+INSERT INTO `sedt2`.`persona` (`dni`, `nombre`, `apellido`, `correo`, `puesto`, `supervisor`) VALUES ('72152069', 'Valeria', 'Llerena', 'vllerena@gmail.com', 'GERENTE', '1');
+INSERT INTO `sedt2`.`persona` (`dni`, `nombre`, `apellido`, `correo`, `puesto`, `supervisor`) VALUES ('123', 'Jose', 'Perez', 'jperez@gmail.com', 'ASISTENTE', '0');
+INSERT INTO `sedt2`.`persona` (`dni`, `nombre`, `apellido`, `correo`, `puesto`, `supervisor`) VALUES ('456', 'Tito', 'Bohorquez', 'tboh@gmail.com', 'ASISTENTE', '0');
+INSERT INTO `sedt2`.`persona` (`dni`, `nombre`, `apellido`, `correo`, `puesto`, `supervisor`) VALUES ('789', 'Maria', 'Lucas', 'mlucas@gmail.com', 'SECRETARIA', '0');
+INSERT INTO `sedt2`.`objetivo` (`idObjetivo`, `nombre`, `descripcion`, `idPersona`, `fechaInicio`, `fechaFin`, `meta`, `aceptable`, `tipoMetrica`, `nombreMetrica`) VALUES ('1', 'CLIENTES CONTENTOS', 'NRO DE CLIENTES CONTENTOS CON EL SERVICIO DE RECEPCIÓN', '789', '2023/06/27', '2023/12/27', 'Recibir 10 comentarios positivos en sitio de críticas. ', 'Recibir 5 críticas positivas de clientes. ', '1', 'CRITICAS POSITIVAS');
+INSERT INTO `sedt2`.`objetivo` (`idObjetivo`, `nombre`, `descripcion`, `idPersona`, `fechaInicio`, `fechaFin`, `meta`, `aceptable`, `tipoMetrica`, `nombreMetrica`) VALUES ('2', 'APOYAR A EMPLEADOS NUEVOS', 'APOYAR A COMPAÑEROS NUEVOS EN EL SERVICIO', '123', '2023/05/01', '2023/07/12', 'Empleados  nuevos contentos', 'Empleado nuevo confuso', '0', 'EMPLEADO CONTENTO');
+INSERT INTO `sedt2`.`progreso` (`idProgreso`, `fecha`, `porcentaje`, `idObjetivo`, `descripcion`, `idPersona`) VALUES ('1', '2023/06/28', '10', '1', '1 crítica positiva de cliente', '72152069');
+
+
