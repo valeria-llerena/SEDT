@@ -4,5 +4,5 @@ import {methods as persona_controller} from "../controllers/persona_controller.j
 const router = Router(); 
 router.get("/", persona_controller.getPersonas);
 router.post("/", persona_controller.addPersona);
-router.get("/:id/:contra", persona_controller.getPersona);
+router.post("/login", persona_controller.logPersona);
 export default router; 

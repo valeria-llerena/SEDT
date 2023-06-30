@@ -1,6 +1,7 @@
 import { getConnection } from "./../database/database.js";
-
+//const bcrypt = require('bcrypt');
 import mysql from "mysql2/promise.js";
+import bcrypt from "bcrypt/bcrypt.js";
 import config from "../config.js";
 
 const getPersonas = async (req, res) => {
@@ -14,21 +15,30 @@ const getPersonas = async (req, res) => {
   }
 };
 
-const getPersona = async (req, res) => {
+const logPersona = async (req, res) => {
   try {
-    const { id, contra } = req.params;
-    const idPersona = id;
-    const contraseña = contra; 
-    if(id == contra){
-      const connection = await getConnection();
-      const result = await connection
-        .promise()
-        .query("SELECT * FROM persona WHERE dni =?", idPersona);
-      res.json({ message: result });
-   }
-    else{
-      res.json({ message: "ID O CONTRASEÑA INCORRECTA" });
-    }
+    const { dni, dni2 } = req.body;
+    const connection = await getConnection();
+    connection.query('SELECT * FROM persona WHERE dni = ?', [dni], (error, results) => {
+      if (error) {
+        console.error('Error occurred:', error);
+        return res.status(500).json({ error: 'An unexpected error occurred' });
+      }
+  
+      if (results.length === 0) {
+        // User does not exist
+        return res.status(401).json({ error: 'Invalid username or password' });
+      }
+  
+      const user = results[0];
+      
+      if(dni == dni2){
+        return res.status(200).json({ message: 'Login successful' });
+      }
+      else{
+        return res.status(401).json({ error: 'Invalid username or password' });
+      }
+  });
   }
   catch (error) {
     res.status(500);
@@ -54,6 +64,6 @@ const addPersona = async (req, res) => {
 
 export const methods = {
   getPersonas,
-  getPersona,
+  logPersona,
   addPersona,
 };
