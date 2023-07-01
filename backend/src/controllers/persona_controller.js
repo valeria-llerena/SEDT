@@ -15,6 +15,20 @@ const getPersonas = async (req, res) => {
   }
 };
 
+const getResponsable = async (req, res) => {
+  try {
+    const { dni } = req.params;
+    const connection = await getConnection();
+    const result = await connection
+      .promise()
+      .query("SELECT  * FROM persona WHERE dni = ?", dni);
+    res.json(result[0]);
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
+  }
+};
+
 const logPersona = async (req, res) => {
   try {
     const { dni, dni2 } = req.body;
@@ -72,4 +86,5 @@ export const methods = {
   getPersonas,
   logPersona,
   addPersona,
+  getResponsable,
 };

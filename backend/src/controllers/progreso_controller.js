@@ -6,9 +6,8 @@ import config from "../config.js";
 const getProgresos = async (req, res) => {
   try {
     const connection = await getConnection();
-    const result = await connection.promise().query("SELECT   * FROM progreso");
-    console.log(result);
-    res.json(result);
+    const result = await connection.promise().query("SELECT * FROM progreso");
+    res.json(result[0]);
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -39,7 +38,7 @@ const getProgresoObjetivo = async (req, res) => {
     const result = await connection
       .promise()
       .query("SELECT * FROM progreso WHERE idObjetivo = ?", id);
-    res.json({ message: result });
+    res.json({ result: result[0] });
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -84,7 +83,7 @@ const updateStatus = async (req, res) => {
         status,
         idProgreso,
       ]);
-    res.json(result);
+    res.json(result[0]);
   } catch (error) {
     res.status(500);
     res.send(error.message);
