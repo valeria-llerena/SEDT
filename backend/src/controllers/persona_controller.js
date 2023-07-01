@@ -33,7 +33,7 @@ const logPersona = async (req, res) => {
       const user = results[0];
       
       if(dni == dni2){
-        return res.status(200).json({ message: 'Login successful' });
+        return res.send(results); 
       }
       else{
         return res.status(401).json({ error: 'Invalid username or password' });

@@ -79,10 +79,39 @@ const addProgreso = async (req, res) =>{
     }
 };
 
+const updateStatus  = async(req, res) =>{
+    try {
+        const{
+            idProgreso, status
+        } = req.body; 
+        const connection = await getConnection();
+        const result = await connection.promise().query('UPDATE progreso  SET status = ? WHERE idProgreso =  ?', [status, idProgreso]);
+        res.json(result); 
+    } catch (error) {
+        res.status(500); 
+        res.send(error.message)
+    }
+}
+const updatePorc  = async(req, res) =>{
+    try {
+        const{
+            idProgreso, porcentaje
+        } = req.body; 
+        const connection = await getConnection();
+        const result = await connection.promise().query('UPDATE progreso  SET porcentaje = ? WHERE idProgreso =  ?', [porcentaje, idProgreso]);
+        res.json(result); 
+    } catch (error) {
+        res.status(500); 
+        res.send(error.message)
+    }
+}
+
 export const methods = {
     getProgresos,
     addProgreso,
     getProgreso, 
     getProgresoObjetivo, 
-    getProgresoPersona
+    getProgresoPersona,
+    updateStatus, 
+    updatePorc
 }; 
