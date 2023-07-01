@@ -31,13 +31,9 @@ const getObjetivo = async (req, res) => {
 
 const addObjetivos = async (req, res) => {
   try {
-    const {
-      idObjetivo, nombre, descripcion, porcentaje, idPersona, fechaInicio, fechaFin, meta, aceptable, tipoMetrica, nombreMetrica
-    } = req.body;
     const connection = await getConnection();
-    console.log("objetivo", objetivo);
     await connection.promise().query("INSERT INTO objetivo SET ?", req.body);
-    res.json({ message: "Objetivo Agregado" });
+    res.json({ message: "Objetivo Agregado", response: true });
   } catch (error) {
     res.status(500);
     res.send(error.message);
