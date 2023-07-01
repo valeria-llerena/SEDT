@@ -4,9 +4,6 @@ import {methods as progreso_controller} from "../controllers/progreso_controller
 const router = Router(); 
 router.get("/", progreso_controller.getProgresos);
 router.post("/", progreso_controller.addProgreso);
-router.get("/:id", progreso_controller.getProgreso);
-router.get("/per/:id", progreso_controller.getProgresoPersona); //ESTO ES LA PERSONA QUE REGISTRO EL PROGRESO. 
-router.get("/obj/:id", progreso_controller.getProgresoObjetivo);
 router.post("/status", progreso_controller.updateStatus);
 router.post("/porc", progreso_controller.updatePorc);
 export default router; 
