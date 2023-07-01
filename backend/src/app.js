@@ -9,7 +9,7 @@ import progreso_router from "../src/routes/progreso_router.js";
 const app = express();
 
 //Settings
-app.set("port", 4000);
+app.set("port", 8080);
 
 //Middlewares
 app.use(
