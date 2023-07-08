@@ -44,7 +44,7 @@ const logPersona = async (req, res) => {
             .json({ error: "An unexpected error occurred" });
         }
 
-        if (results.length === 0) {
+        if (results.length == 0) {
           // User does not exist
           return res
             .status(401)
