@@ -2,11 +2,11 @@ import mysql from "mysql2";
 import config from "../config.js";
 
 const connection = mysql.createConnection({
-    host: "34.172.3.130",
-    database: "sedt",
+    host: "34.31.214.223",
+    database: "sedt2",
     user: "root", 
-    password: "",
-    port: 8080
+    password: "2c'B#LQ'/,nTQVZ{",
+    port: 3306
 });
 
 export const getConnection = ()=>{
