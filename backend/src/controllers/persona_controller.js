@@ -46,7 +46,7 @@ const logPersona = async (req, res) => {
   
       const user = results[0];
       
-      if(dni == dni2){
+      if(dni === dni2){
         return res.send(results); 
       }
       else{
